@@ -7,6 +7,7 @@ import Footer from './components/layout/Footer';
 import Header from './components/layout/Header';
 
 import ProductDetails from './components/products/ProductDetails';
+import Login from './components/user/Login';
 
 const App = () => {
     return (
@@ -17,6 +18,8 @@ const App = () => {
                     <Route path="/" component={Home} exact />
                     <Route path="/search/:keyword" component={Home} />
                     <Route path="/product/:id" component={ProductDetails} exact />
+
+                    <Route path="/login" component={Login} />
                 </div>
                 <Footer />
             </div>
