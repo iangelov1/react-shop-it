@@ -1,9 +1,6 @@
 import React, { useState } from 'react'
 
 const Search = ({ history }) => {
-    
-    console.log(history);
-
     const [keyword, setKeyword] = useState('');
 
     const searchHandler = (e) => {
