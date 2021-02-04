@@ -14,6 +14,7 @@ import Register from './components/user/Register';
 
 import { loadUser } from './actions/userActions';
 import store from './store';
+import Profile from './components/user/Profile';
 
 const App = () => {
     useEffect(() => {
@@ -31,6 +32,7 @@ const App = () => {
 
                     <Route path="/login" component={Login} />
                     <Route path="/register" component={Register} />
+                    <Route path="/me" component={Profile} />
                 </div>
                 <Footer />
             </div>
