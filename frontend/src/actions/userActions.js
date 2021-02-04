@@ -64,6 +64,7 @@ export const register = (userData) => async (dispatch) => {
     }
 };
 
+// clear error
 export const clearErrors = () => async (dispatch) => {
     dispatch({
         type: CLEAR_ERRORS

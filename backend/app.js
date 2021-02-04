@@ -3,12 +3,22 @@ const express = require('express');
 // create new express app and save it as "app"
 const app = express();
 
-const cookieParser = require('cookie-parser')
+const cookieParser = require('cookie-parser');
+const bodyparser = require('body-parser');
+const cloudinary = require('cloudinary')
 
 const errorMiddleware = require('./middlewares/errors');
 
 app.use(express.json());
+app.use(bodyparser.urlencoded({ extended: true }))
 app.use(cookieParser());
+
+// Setting up cloudinary configuration
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_CLOUD_NAME,
+    api_secret: process.env.CLOUDINARY_API_SECRET
+});
 
 // Import all routes
 const products = require('./routes/product');
