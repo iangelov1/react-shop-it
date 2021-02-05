@@ -8,26 +8,33 @@ const sendEmail = require('../utils/sendEmail');
 const crypto = require('crypto');
 const cloudinary = require('cloudinary');
 
+
+// const fs = require('fs');
+
 // Register a user   => /api/v1/register
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
 
-    const result = await cloudinary.v2.uploader.upload(req.body.avatar, {
-        folder: 'avatars',
-        width: 150,
-        crop: "scale"
-    })
+    // const result = await cloudinary.v2.uploader.upload(req.body.avatar, {
+    //     folder: 'avatars',
+    //     width: 150,
+    //     crop: "scale"
+    // })
 
-    const { name, email, password } = req.body;
+    const { name, email, password, avatar, imageName } = req.body;
 
-    console.log(result)
+    // let base64Image = avatar.split(';base64,').pop();
+
+    // fs.writeFile(`${imageName}`, base64Image, {encoding: 'base64'}, function(err) {
+
+    // });
 
     const user = await User.create({
         name,
         email,
         password,
         avatar: {
-            public_id: result.public_id,
-            url: result.secure_url
+            public_id: "products/wmoa49q9e70ze9xtcra2",
+            url: "https://res.cloudinary.com/shopit/image/upload/v1606231282/products/wmoa49q9e70ze9xtcra2.jpg"
         }
     })
 

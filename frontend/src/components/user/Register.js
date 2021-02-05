@@ -18,6 +18,7 @@ const Register = ({ history }) => {
 
     const [avatar, setAvatar] = useState('')
     const [avatarPreview, setAvatarPreview] = useState('/images/default_avatar.jpg')
+    const [imageName, setImageName] = useState();
 
     const alert = useAlert();
     const dispatch = useDispatch();
@@ -44,6 +45,7 @@ const Register = ({ history }) => {
         formData.set('name', name);
         formData.set('email', email);
         formData.set('password', password);
+        formData.set('imageName', imageName)
         formData.set('avatar', avatar);
 
         dispatch(register(formData))
@@ -62,6 +64,7 @@ const Register = ({ history }) => {
             }
 
             reader.readAsDataURL(e.target.files[0])
+            setImageName(e.target.files[0].name)
 
         } else {
             setUser({ ...user, [e.target.name]: e.target.value })
