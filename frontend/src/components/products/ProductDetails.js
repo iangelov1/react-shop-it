@@ -66,7 +66,7 @@ const ProductDetails = ({ match }) => {
                                     <div className="stockCounter d-inline">
                                         <span className="btn btn-danger minus">-</span>
                 
-                                        <input type="number" className="form-control count d-inline" value="1" readOnly />
+                                        <input type="number" className="form-control count d-inline" defaultValue="1" readOnly />
                 
                                         <span className="btn btn-primary plus">+</span>
                                     </div>
@@ -120,7 +120,7 @@ const ProductDetails = ({ match }) => {
                                                                 <li className="star"><i className="fa fa-star"></i></li>
                                                             </ul>
                 
-                                                            <textarea name="review" id="review" className="form-control mt-3"> </textarea>
+                                                            <textarea name="review" id="review" className="form-control mt-3" value=""> </textarea>
                 
                                                             <button className="btn my-3 float-right review-btn px-4 text-white" data-dismiss="modal" aria-label="Close">Submit</button>
                                                         </div>

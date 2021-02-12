@@ -4,13 +4,14 @@ import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 
 import { productsReducer, productDetailsReducer } from './reducers/productReducers';
-import { authReducer, userReducer } from './reducers/userReducers';
+import { authReducer, userReducer, forgotPasswordReducer } from './reducers/userReducers';
 
 const reducer = combineReducers({
     products: productsReducer,
     productDetails: productDetailsReducer,
     auth: authReducer,
-    user: userReducer
+    user: userReducer,
+    forgotPassword: forgotPasswordReducer
 })
 
 let initialState = {};
