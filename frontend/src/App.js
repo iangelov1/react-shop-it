@@ -13,6 +13,7 @@ import Login from './components/user/Login';
 import Register from './components/user/Register';
 
 import { loadUser } from './actions/userActions';
+
 import store from './store';
 import Profile from './components/user/Profile';
 import ProtectedRoute from './components/route/ProtectedRoute'
@@ -21,6 +22,8 @@ import UpdatePassword from './components/user/UpdatePassword';
 import ForgotPassword from './components/user/ForgotPassword';
 import NewPassword from './components/user/NewPassword';
 import Cart from './components/cart/Cart';
+import Shipping from './components/cart/Shipping';
+import ConfirmOrder from './components/cart/ConfirmOrder';
 
 const App = () => {
     useEffect(() => {
@@ -42,6 +45,8 @@ const App = () => {
                     <Route path="/password/reset/:token" component={NewPassword} exact />
 
                     <Route path="/cart" component={Cart} exact />
+                    <ProtectedRoute path="/shipping" component={Shipping} />
+                    <ProtectedRoute path="/order/confirm" component={ConfirmOrder} />
 
                     <ProtectedRoute path="/me" component={Profile} exact />
                     <ProtectedRoute path="/me/update" component={UpdateProfile} exact />
