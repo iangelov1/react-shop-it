@@ -14,6 +14,8 @@ const UpdateProfile = ({ history }) => {
     const [email, setEmail] = useState('')
     const [avatar, setAvatar] = useState('')
     const [avatarPreview, setAvatarPreview] = useState('/images/default_avatar.jpg')
+    const [changeImage, setChangeImage] = useState(false);
+    const [imageName, setImageName] = useState();
 
     const alert = useAlert();
     const dispatch = useDispatch();
@@ -49,19 +51,20 @@ const UpdateProfile = ({ history }) => {
 
     const submitHandler = (e) => {
         e.preventDefault();
-
         const formData = new FormData();
+
         formData.set('name', name);
         formData.set('email', email);
+        formData.set('imageName', imageName)
         formData.set('avatar', avatar);
-
-        console.log("FORM_DATA: ", formData)
 
         dispatch(updateProfile(formData))
     }
 
     const onChange = e => {
         const reader = new FileReader();
+
+        setChangeImage(true)
 
         reader.onload = () => {
             if (reader.readyState === 2) {
@@ -70,9 +73,11 @@ const UpdateProfile = ({ history }) => {
             }
         }
 
-        reader.readAsDataURL(e.target.files[0])
+        reader.readAsDataURL(e.target.files[0]);
+        setImageName(e.target.files[0].name)
 
     }
+
     return (
         <Fragment>
             <MetaData title={'Update Profile'} />
@@ -112,7 +117,7 @@ const UpdateProfile = ({ history }) => {
                                 <div>
                                     <figure className='avatar mr-3 item-rtl'>
                                         <img
-                                            src={avatarPreview}
+                                            src={changeImage ? avatarPreview : `/images/${user?.imageName}`}
                                             className='rounded-circle'
                                             alt='Avatar Preview'
                                         />

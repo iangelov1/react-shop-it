@@ -6,36 +6,28 @@ const sendToken = require('../utils/jwtToken');
 const sendEmail = require('../utils/sendEmail');
 
 const crypto = require('crypto');
-const cloudinary = require('cloudinary');
+const cloudinary = require('cloudinary').v2;
 
-
-// const fs = require('fs');
+const fs = require('fs');
 
 // Register a user   => /api/v1/register
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
 
-    // const result = await cloudinary.v2.uploader.upload(req.body.avatar, {
-    //     folder: 'avatars',
-    //     width: 150,
-    //     crop: "scale"
-    // })
-
     const { name, email, password, avatar, imageName } = req.body;
 
-    // let base64Image = avatar.split(';base64,').pop();
+    let base64Image = avatar.split(';base64,').pop();
 
-    // fs.writeFile(`${imageName}`, base64Image, {encoding: 'base64'}, function(err) {
-
-    // });
+    fs.writeFile(`C://Users/ivan.angelov/Desktop/Apps/react-shop-it/frontend/public/images/${imageName}`, base64Image, {encoding: 'base64'}, function(err) {
+    });
 
     const user = await User.create({
         name,
         email,
         password,
         avatar: {
-            public_id: "products/wmoa49q9e70ze9xtcra2",
-            url: "https://res.cloudinary.com/shopit/image/upload/v1606231282/products/wmoa49q9e70ze9xtcra2.jpg"
-        }
+            url: `C://Users/ivan.angelov/Desktop/Apps/react-shop-it/frontend/public/images/${imageName}`
+        },
+        imageName
     })
 
     sendToken(user, 200, res)
@@ -149,20 +141,16 @@ exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
 
     // Update avatar
     if (req.body.avatar !== '') {
-        const user = await User.findById(req.user.id)
+        const user = await User.findById(req.user.id);
 
-        const image_id = user.avatar.public_id;
-        const res = await cloudinary.v2.uploader.destroy(image_id);
+        let base64Image = req.body.avatar.split(';base64,').pop();
 
-        const result = await cloudinary.v2.uploader.upload(req.body.avatar, {
-            folder: 'avatars',
-            width: 150,
-            crop: "scale"
-        })
+        fs.writeFile(`C://Users/ivan.angelov/Desktop/Apps/react-shop-it/frontend/public/images/${req.body.imageName}`, base64Image, {encoding: 'base64'}, function(err) {
+
+        });
 
         newUserData.avatar = {
-            public_id: result.public_id,
-            url: result.secure_url
+            url: `C://Users/ivan.angelov/Desktop/Apps/react-shop-it/frontend/public/images/${req.body.imageName}`
         }
     }
 

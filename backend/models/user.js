@@ -23,14 +23,14 @@ const userSchema = new mongoose.Schema({
         select: false
     },
     avatar: {
-        public_id: {
-            type: String,
-            required: true
-        },
         url: {
             type: String,
             required: true
         }
+    },
+    imageName: {
+        type: String,
+        required: [true, 'Please upload file'],
     },
     role: {
         type: String,

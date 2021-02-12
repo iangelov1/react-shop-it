@@ -21,6 +21,8 @@ const Header = () => {
         alert.success('Logged out successfully')
     }
     
+    console.log(user)
+
     return (
         <Fragment>
             <nav className="navbar now">
@@ -57,7 +59,7 @@ const Header = () => {
                                         >
                                             <figure className="avatar avatar-nav">
                                                 <img
-                                                    src={user.avatar && user.avatar.url}
+                                                    src={`/images/${user.imageName}`}
                                                     alt={user && user.name}
                                                     className="rounded-circle"
                                                 />
