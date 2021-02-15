@@ -25,8 +25,8 @@ const ConfirmOrder = ({ history }) => {
             totalPrice
         }
 
-        sessionStorage.setItem('orderInfo', JSON.stringify(data))
-        history.push('/payment')
+        sessionStorage.setItem('orderInfo', JSON.stringify(data));
+        history.push('/payment');
     }
 
     return (

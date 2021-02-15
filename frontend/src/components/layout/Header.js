@@ -23,8 +23,6 @@ const Header = () => {
         alert.success('Logged out successfully')
     }
     
-    console.log(user)
-
     return (
         <Fragment>
             <nav className="navbar now">
