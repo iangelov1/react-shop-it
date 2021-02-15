@@ -9,6 +9,7 @@ const crypto = require('crypto');
 const cloudinary = require('cloudinary').v2;
 
 const fs = require('fs');
+const { setTimeout } = require('timers');
 
 // Register a user   => /api/v1/register
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
@@ -136,7 +137,7 @@ exports.updatePassword = catchAsyncErrors(async (req, res, next) => {
 exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
     const newUserData = {
         name: req.body.name,
-        email: req.body.email
+        email: req.body.email,
     }
 
     // Update avatar
@@ -152,6 +153,8 @@ exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
         newUserData.avatar = {
             url: `C://Users/ivan.angelov/Desktop/Apps/react-shop-it/frontend/public/images/${req.body.imageName}`
         }
+
+        newUserData.imageName = req.body.imageName;
     }
 
     const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
