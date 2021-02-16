@@ -1,5 +1,4 @@
-import React, { Fragment, useState, useEffect } from 'react';
-import { countries } from 'countries-list'
+import React, { Fragment, useEffect } from 'react';
 
 import MetaData from '../layout/MetaData'
 import CheckoutSteps from './CheckoutSteps'
@@ -7,7 +6,7 @@ import CheckoutSteps from './CheckoutSteps'
 import { useAlert } from 'react-alert';
 import { useDispatch, useSelector } from 'react-redux';
 
-// import { createOrder, clearErrors } from '../../actions/orderActions'с
+import { createOrder, clearErrors } from '../../actions/orderActions'
 
 import { useStripe, useElements, CardNumberElement, CardExpiryElement, CardCvcElement } from '@stripe/react-stripe-js';
 
@@ -33,16 +32,16 @@ const Payment = ({ history  }) => {
 
     const { user } = useSelector(state => state.auth)
     const { cartItems, shippingInfo } = useSelector(state => state.cart);
-    // const { error } = useSelector(state => state.newOrder)
+    const { error } = useSelector(state => state.newOrder)
 
     useEffect(() => {
 
-        // if (error) {
-        //     alert.error(error)
-        //     // dispatch(clearErrors())с
-        // }
+        if (error) {
+            alert.error(error)
+            dispatch(clearErrors())
+        }
 
-    }, [dispatch, alert])
+    }, [dispatch, alert, error])
 
     const order = {
         orderItems: cartItems,
@@ -102,20 +101,18 @@ const Payment = ({ history  }) => {
                 // The payment is processed or not
                 if (result.paymentIntent.status === 'succeeded') {
 
-                    // order.paymentInfo = {
-                    //     id: result.paymentIntent.id,
-                    //     status: result.paymentIntent.status
-                    // }
+                    order.paymentInfo = {
+                        id: result.paymentIntent.id,
+                        status: result.paymentIntent.status
+                    }
 
-                    // dispatch(createOrder(order))
+                    dispatch(createOrder(order))
 
                     history.push('/success')
                 } else {
                     alert.error('There is some issue while payment processing')
                 }
             }
-
-
         } catch (error) {
             document.querySelector('#pay_btn').disabled = false;
             alert.error(error.response.data.message)
@@ -150,11 +147,7 @@ const Payment = ({ history  }) => {
                             <CardCvcElement type="text" id="card_cvc_field" className="form-control" options={options} />
                         </div>
 
-                        <button
-                            id="pay_btn"
-                            type="submit"
-                            className="btn btn-block py-3"
-                        >
+                        <button id="pay_btn" type="submit" className="btn btn-block py-3">
                             Pay {` - ${orderInfo && orderInfo.totalPrice}`}
                         </button>
                     </form>
