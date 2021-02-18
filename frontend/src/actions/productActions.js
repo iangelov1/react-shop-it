@@ -11,6 +11,7 @@ import {
     NEW_REVIEW_SUCCESS,
     NEW_REVIEW_FAIL,
 
+<<<<<<< HEAD
     ADMIN_PRODUCTS_REQUEST,
     ADMIN_PRODUCTS_SUCCESS ,
     ADMIN_PRODUCTS_FAIL,
@@ -19,6 +20,8 @@ import {
     NEW_PRODUCT_SUCCESS,
     NEW_PRODUCT_FAIL,
 
+=======
+>>>>>>> parent of fdb5aa8 (admin sidebar component / dashboard component / display all products admin)
     CLEAR_ERRORS 
 } from '../constans/productConstants';
 
@@ -94,24 +97,6 @@ export const newReview = (reviewData) => async (dispatch) => {
     }
 }
 
-// get product details 
-export const getAdminProducts = () => async (dispatch) => {
-    try {
-        dispatch({ type: ADMIN_PRODUCTS_REQUEST })
-
-        const { data }  = await axios.get(`/api/v1/admin/products`)
-
-        dispatch({
-            type: ADMIN_PRODUCTS_SUCCESS,
-            payload: data.products
-        })
-    } catch (error) {
-        dispatch({
-            type: ADMIN_PRODUCTS_FAIL,
-            payload: error.response.data.message
-        })
-    }
-};
 
 
 export const newProduct = (productData) => async (dispatch) => {
