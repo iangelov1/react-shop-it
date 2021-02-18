@@ -18,7 +18,7 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
 
     let base64Image = avatar.split(';base64,').pop();
 
-    fs.writeFile(`C://Users/ivan.angelov/Desktop/Apps/react-shop-it/frontend/public/images/${imageName}`, base64Image, {encoding: 'base64'}, function(err) {
+    fs.writeFile(`C://Users/ivan.angelov/Desktop/Apps/react-shop-it/frontend/public/images/userAvatar/${imageName}`, base64Image, {encoding: 'base64'}, function(err) {
     });
 
     const user = await User.create({
@@ -26,7 +26,7 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
         email,
         password,
         avatar: {
-            url: `C://Users/ivan.angelov/Desktop/Apps/react-shop-it/frontend/public/images/${imageName}`
+            url: `C://Users/ivan.angelov/Desktop/Apps/react-shop-it/frontend/public/images/userAvatar/${imageName}`
         },
         imageName
     })

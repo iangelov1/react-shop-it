@@ -117,7 +117,7 @@ const UpdateProfile = ({ history }) => {
                                 <div>
                                     <figure className='avatar mr-3 item-rtl'>
                                         <img
-                                            src={changeImage ? avatarPreview : `/images/${user?.imageName}`}
+                                            src={changeImage ? avatarPreview : `/images/userAvatar/${user?.imageName}`}
                                             className='rounded-circle'
                                             alt='Avatar Preview'
                                         />
