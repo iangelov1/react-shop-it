@@ -32,9 +32,11 @@ import NewPassword from './components/user/NewPassword';
 // Admin Imports
 import Dashboard from './components/admin/Dashboard';
 import ProductsList from './components/admin/ProductsList';
+// import NewProduct from './components/admin/NewProduct';
 
 import ProtectedRoute from './components/route/ProtectedRoute';
 import { loadUser } from './actions/userActions';
+import { useSelector } from 'react-redux';
 import store from './store';
 import axios from 'axios';
 
@@ -57,6 +59,8 @@ const App = () => {
 
         getStripApiKey();
     }, []);
+
+    const { user, isAuthenticated, loading } = useSelector(state => state.auth)
 
     return (
         <Router>
@@ -95,8 +99,11 @@ const App = () => {
 
                 <ProtectedRoute path="/dashboard" isAdmin={true} component={Dashboard} exact />
                 <ProtectedRoute path="/admin/products" isAdmin={true} component={ProductsList} exact />
+                {/* <ProtectedRoute path="/admin/product" isAdmin={true} component={NewProduct} exact /> */}
 
-                <Footer />
+                {!loading && (!isAuthenticated || user.role !== 'admin') && (
+                    <Footer />
+                )}
             </div>
         </Router>
     )
