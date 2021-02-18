@@ -3,36 +3,18 @@ const Product = require('../models/product');
 const ErrorHandler = require('../utils/errorHandler');
 const catchAsyncErrors = require('../middlewares/catchAsyncErrors');
 const APIFeatures = require('../utils/apiFeatures');
-const cloudinary = require('cloudinary')
-const fs = require('fs');
 
 // Create new product => /api/vi/admin/product/new
 exports.newProduct = catchAsyncErrors(async (req, res, next) => {
 
-    // const { name, price, description, category, stock, seller, imageName, avatar } = req.body;
+    req.body.user = req.user.id;
 
-    // let base64Image = avatar.split(';base64,').pop();
+    const product = await Product.create(req.body);
 
-    // fs.writeFile(`C://Users/ivan.angelov/Desktop/Apps/react-shop-it/frontend/public/images/${imageName}`, base64Image, {encoding: 'base64'}, function(err) {
-    // });
-
-    // const product = await Product.create({
-    //     name,
-    //     price,
-    //     description,
-    //     category,
-    //     stock,
-    //     seller,
-    //     imageName,
-    //     images: {
-    //         url: `C://Users/ivan.angelov/Desktop/Apps/react-shop-it/frontend/public/images/${imageName}`
-    //     },
-    // })
-
-    // res.status(201).json({
-    //     success: true,
-    //     product
-    // })
+    res.status(201).json({
+        success: true,
+        product
+    })
 });
 
 // Get all products   =>   /api/v1/products?keyword=apple
@@ -48,8 +30,9 @@ exports.getProducts = catchAsyncErrors(async (req, res, next) => {
     let products = await apiFeatures.query;
     let filteredProductsCount = products.length;
 
-    apiFeatures.pagination(resPerPage);
+    apiFeatures.pagination(resPerPage)
     products = await apiFeatures.query;
+
 
     res.status(200).json({
         success: true,

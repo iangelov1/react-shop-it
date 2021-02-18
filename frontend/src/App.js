@@ -28,11 +28,9 @@ import ConfirmOrder from './components/cart/ConfirmOrder';
 // Admin Imports
 import Dashboard from './components/admin/Dashboard';
 import ProductsList from './components/admin/ProductsList';
-// import NewProduct from './components/admin/NewProduct';
 
 import ProtectedRoute from './components/route/ProtectedRoute';
 import { loadUser } from './actions/userActions';
-import { useSelector } from 'react-redux';
 import store from './store';
 =======
 import Payment from './components/cart/Payment';
@@ -63,8 +61,6 @@ const App = () => {
 
         getStripApiKey();
     }, []);
-
-    const { user, isAuthenticated, loading } = useSelector(state => state.auth)
 
     return (
         <Router>
@@ -104,14 +100,17 @@ const App = () => {
 
                 <ProtectedRoute path="/dashboard" isAdmin={true} component={Dashboard} exact />
                 <ProtectedRoute path="/admin/products" isAdmin={true} component={ProductsList} exact />
-                {/* <ProtectedRoute path="/admin/product" isAdmin={true} component={NewProduct} exact /> */}
 
+<<<<<<< HEAD
                 {!loading && (!isAuthenticated || user.role !== 'admin') && (
                     <Footer />
                 )}
 =======
                 <Footer />
 >>>>>>> parent of fdb5aa8 (admin sidebar component / dashboard component / display all products admin)
+=======
+                <Footer />
+>>>>>>> parent of 78382f4 (create new Product)
             </div>
         </Router>
     )
