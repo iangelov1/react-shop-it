@@ -9,7 +9,6 @@ const crypto = require('crypto');
 const cloudinary = require('cloudinary').v2;
 
 const fs = require('fs');
-const { setTimeout } = require('timers');
 
 // Register a user   => /api/v1/register
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {

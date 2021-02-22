@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import './App.css';
 
@@ -41,10 +42,15 @@ import axios from 'axios';
 // Payment
 import { Elements } from '@stripe/react-stripe-js'
 import { loadStripe } from '@stripe/stripe-js'
+import NewProduct from './components/admin/NewProduct';
+
 
 const App = () => {
 
     const [stripeApiKey, setStripeApiKey] = useState('');
+
+    const { user, isAuthenticated, loading } = useSelector(state => state.auth)
+
 
     useEffect(() => {
         store.dispatch(loadUser())
@@ -95,8 +101,11 @@ const App = () => {
 
                 <ProtectedRoute path="/dashboard" isAdmin={true} component={Dashboard} exact />
                 <ProtectedRoute path="/admin/products" isAdmin={true} component={ProductsList} exact />
+                <ProtectedRoute path="/admin/product" isAdmin={true} component={NewProduct} exact />
 
-                <Footer />
+                {!loading && (!isAuthenticated || user.role !== 'admin') && (
+                    <Footer />
+                )}
             </div>
         </Router>
     )

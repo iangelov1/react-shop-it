@@ -4,10 +4,36 @@ const ErrorHandler = require('../utils/errorHandler');
 const catchAsyncErrors = require('../middlewares/catchAsyncErrors');
 const APIFeatures = require('../utils/apiFeatures');
 
+const fs = require('fs');
+
+
 // Create new product => /api/vi/admin/product/new
 exports.newProduct = catchAsyncErrors(async (req, res, next) => {
+    let avatars = []
 
-    req.body.user = req.user.id;
+    if (typeof req.body.avatar === 'string') {
+        console.log('1111111111111111111111111111111')
+        avatars.push(req.body.avatar)
+    } else {
+        console.log('2222222222222222222222222222222')
+        avatars = req.body.avatar
+    }
+
+    let imagesLinks = [];
+
+    for (let i = 0; i < avatars.length; i++) {
+        let base64Image = avatars[i].split(';base64,').pop();
+
+        fs.writeFile(`C://Users/ivan.angelov/Desktop/Apps/react-shop-it/frontend/public/images/products/${req.body.imageName}`, base64Image, {encoding: 'base64'}, function(err) {
+        });
+
+        imagesLinks.push({
+            url: `C://Users/ivan.angelov/Desktop/Apps/react-shop-it/frontend/public/images/products/${req.body.imageName}`
+        })
+    }
+
+    req.body.images = imagesLinks
+    // req.body.user = req.user.id;
 
     const product = await Product.create(req.body);
 
