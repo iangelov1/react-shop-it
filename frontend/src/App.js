@@ -45,6 +45,7 @@ import { Elements } from '@stripe/react-stripe-js'
 import { loadStripe } from '@stripe/stripe-js'
 // import NewProduct from './components/admin/NewProduct';
 import OrdersList from './components/admin/OrderList';
+import UsersList from './components/admin/UsersList';
 
 
 const App = () => {
@@ -106,6 +107,7 @@ const App = () => {
                 {/* <ProtectedRoute path="/admin/product" isAdmin={true} component={NewProduct} exact /> */}
                 <ProtectedRoute path="/admin/orders" isAdmin={true} component={OrdersList} exact />
                 <ProtectedRoute path="/admin/order/:id" isAdmin={true} component={ProcessOrder} exact />
+                <ProtectedRoute path="/admin/users" isAdmin={true} component={UsersList} exact />
 
                 {!loading && (!isAuthenticated || user.role !== 'admin') && (
                     <Footer />
