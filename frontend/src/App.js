@@ -34,6 +34,8 @@ import NewPassword from './components/user/NewPassword';
 import Dashboard from './components/admin/Dashboard';
 import ProductsList from './components/admin/ProductsList';
 import ProcessOrder from './components/admin/ProcessOrder'
+import OrdersList from './components/admin/OrderList';
+import UsersList from './components/admin/UsersList';
 
 import ProtectedRoute from './components/route/ProtectedRoute';
 import { loadUser } from './actions/userActions';
@@ -43,9 +45,9 @@ import axios from 'axios';
 // Payment
 import { Elements } from '@stripe/react-stripe-js'
 import { loadStripe } from '@stripe/stripe-js'
+import UpdateUser from './components/admin/UpdateUser';
 // import NewProduct from './components/admin/NewProduct';
-import OrdersList from './components/admin/OrderList';
-import UsersList from './components/admin/UsersList';
+
 
 
 const App = () => {
@@ -108,6 +110,7 @@ const App = () => {
                 <ProtectedRoute path="/admin/orders" isAdmin={true} component={OrdersList} exact />
                 <ProtectedRoute path="/admin/order/:id" isAdmin={true} component={ProcessOrder} exact />
                 <ProtectedRoute path="/admin/users" isAdmin={true} component={UsersList} exact />
+                <ProtectedRoute path="/admin/user/:id" isAdmin={true} component={UpdateUser} exact />
 
                 {!loading && (!isAuthenticated || user.role !== 'admin') && (
                     <Footer />

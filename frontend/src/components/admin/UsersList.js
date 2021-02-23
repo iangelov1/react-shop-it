@@ -8,8 +8,8 @@ import Sidebar from './Sidebar'
 
 import { useAlert } from 'react-alert'
 import { useDispatch, useSelector } from 'react-redux'
-import { allUsers, clearErrors } from '../../actions/userActions'
-// import { DELETE_USER_RESET } from '../../constans/userConstants'
+import { allUsers, clearErrors, deleteUser } from '../../actions/userActions'
+import { DELETE_USER_RESET } from '../../constans/userConstants'
 
 const UsersList = ({ history }) => {
 
@@ -27,16 +27,16 @@ const UsersList = ({ history }) => {
             dispatch(clearErrors())
         }
 
-        // if (isDeleted) {
-        //     alert.success('User deleted successfully');
-        //     history.push('/admin/users');
-        //     dispatch({ type: DELETE_USER_RESET })
-        // }
+        if (isDeleted) {
+            alert.success('User deleted successfully');
+            history.push('/admin/users');
+            dispatch({ type: DELETE_USER_RESET })
+        }
 
     }, [dispatch, alert, error, isDeleted, history])
 
     const deleteUserHandler = (id) => {
-        // dispatch(deleteUser(id))
+        dispatch(deleteUser(id))
     }
 
     const setUsers = () => {
