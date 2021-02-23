@@ -46,6 +46,7 @@ import axios from 'axios';
 import { Elements } from '@stripe/react-stripe-js'
 import { loadStripe } from '@stripe/stripe-js'
 import UpdateUser from './components/admin/UpdateUser';
+import ProductReviews from './components/admin/ProductReviews';
 // import NewProduct from './components/admin/NewProduct';
 
 
@@ -111,6 +112,7 @@ const App = () => {
                 <ProtectedRoute path="/admin/order/:id" isAdmin={true} component={ProcessOrder} exact />
                 <ProtectedRoute path="/admin/users" isAdmin={true} component={UsersList} exact />
                 <ProtectedRoute path="/admin/user/:id" isAdmin={true} component={UpdateUser} exact />
+                <ProtectedRoute path="/admin/reviews" isAdmin={true} component={ProductReviews} exact />
 
                 {!loading && (!isAuthenticated || user.role !== 'admin') && (
                     <Footer />
