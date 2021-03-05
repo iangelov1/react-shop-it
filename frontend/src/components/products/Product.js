@@ -2,12 +2,13 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 const Product = ({ product, col }) => {
+    console.log(product)
     return (
         <div className={`col-sm-12 col-md-6 col-lg-${col} my-3`}>
             <div className="card p-3 rounded">
                 <img
                     className="card-img-top mx-auto"
-                    src={product.images[0].url}
+                    src={product?.images?.[0]?.url}
                     alt=""
                 />
                 <div className="card-body d-flex flex-column">

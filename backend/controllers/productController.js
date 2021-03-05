@@ -5,35 +5,33 @@ const catchAsyncErrors = require('../middlewares/catchAsyncErrors');
 const APIFeatures = require('../utils/apiFeatures');
 
 const fs = require('fs');
+const cloudinary = require('cloudinary')
 
-
-// Create new product => /api/vi/admin/product/new
+// Create new product   =>   /api/v1/admin/product/new
 exports.newProduct = catchAsyncErrors(async (req, res, next) => {
-    let avatars = []
 
-    if (typeof req.body.avatar === 'string') {
-        console.log('1111111111111111111111111111111')
-        avatars.push(req.body.avatar)
-    } else {
-        console.log('2222222222222222222222222222222')
-        avatars = req.body.avatar
-    }
+    // let images = []
+    // if (typeof req.body.images === 'string') {
+    //     images.push(req.body.images)
+    // } else {
+    //     images = req.body.images
+    // }
 
-    let imagesLinks = [];
+    // let imagesLinks = [];
 
-    for (let i = 0; i < avatars.length; i++) {
-        let base64Image = avatars[i].split(';base64,').pop();
+    // for (let i = 0; i < images.length; i++) {
+    //     const result = await cloudinary.v2.uploader.upload(images[i], {
+    //         folder: 'products'
+    //     });
 
-        fs.writeFile(`C://Users/ivan.angelov/Desktop/Apps/react-shop-it/frontend/public/images/products/${req.body.imageName}`, base64Image, {encoding: 'base64'}, function(err) {
-        });
+    //     imagesLinks.push({
+    //         public_id: result.public_id,
+    //         url: result.secure_url
+    //     })
+    // }
 
-        imagesLinks.push({
-            url: `C://Users/ivan.angelov/Desktop/Apps/react-shop-it/frontend/public/images/products/${req.body.imageName}`
-        })
-    }
-
-    req.body.images = imagesLinks
-    // req.body.user = req.user.id;
+    // req.body.images = imagesLinks
+    req.body.user = req.user.id;
 
     const product = await Product.create(req.body);
 
@@ -41,7 +39,8 @@ exports.newProduct = catchAsyncErrors(async (req, res, next) => {
         success: true,
         product
     })
-});
+})
+
 
 // Get all products   =>   /api/v1/products?keyword=apple
 exports.getProducts = catchAsyncErrors(async (req, res, next) => {

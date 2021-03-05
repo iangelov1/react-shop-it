@@ -47,7 +47,7 @@ import { Elements } from '@stripe/react-stripe-js'
 import { loadStripe } from '@stripe/stripe-js'
 import UpdateUser from './components/admin/UpdateUser';
 import ProductReviews from './components/admin/ProductReviews';
-// import NewProduct from './components/admin/NewProduct';
+import NewProduct from './components/admin/NewProduct';
 
 
 
@@ -107,7 +107,7 @@ const App = () => {
 
                 <ProtectedRoute path="/dashboard" isAdmin={true} component={Dashboard} exact />
                 <ProtectedRoute path="/admin/products" isAdmin={true} component={ProductsList} exact />
-                {/* <ProtectedRoute path="/admin/product" isAdmin={true} component={NewProduct} exact /> */}
+                <ProtectedRoute path="/admin/product" isAdmin={true} component={NewProduct} exact />
                 <ProtectedRoute path="/admin/orders" isAdmin={true} component={OrdersList} exact />
                 <ProtectedRoute path="/admin/order/:id" isAdmin={true} component={ProcessOrder} exact />
                 <ProtectedRoute path="/admin/users" isAdmin={true} component={UsersList} exact />
