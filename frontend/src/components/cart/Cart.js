@@ -38,6 +38,8 @@ const Cart = ({ history }) => {
         history.push('/login?redirect=shipping')
     }
 
+    console.log(cartItems)
+
     return (
         <Fragment>
             <MetaData title={'Your Cart'} />
@@ -55,7 +57,7 @@ const Cart = ({ history }) => {
                                     <div className="cart-item" key={item.product}>
                                         <div className="row">
                                             <div className="col-4 col-lg-3">
-                                                <img src={item.image} alt="Laptop" height="90" width="115" />
+                                                <img src={`/images/products/${item.imageName}`} alt="Laptop" height="90" width="115" />
                                             </div>
 
                                             <div className="col-5 col-lg-3">

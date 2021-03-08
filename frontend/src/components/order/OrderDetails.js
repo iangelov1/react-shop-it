@@ -13,8 +13,8 @@ const OrderDetails = ({ match }) => {
     const alert = useAlert();
     const dispatch = useDispatch();
 
-    const { loading, error, order = {} } = useSelector(state => state.orderDetails)
-    const { shippingInfo, orderItems, paymentInfo, user, totalPrice, orderStatus } = order
+    const { loading, error, order = {} } = useSelector(state => state.orderDetails);
+    const { shippingInfo, orderItems, paymentInfo, user, totalPrice, orderStatus } = order;
 
     useEffect(() => {
         dispatch(getOrderDetails(match.params.id));
@@ -61,6 +61,7 @@ const OrderDetails = ({ match }) => {
                             <hr />
                             <div className="cart-item my-1">
                                 {orderItems && orderItems.map(item => (
+                                    console.log(item),
                                     <div key={item.product} className="row my-5">
                                         <div className="col-4 col-lg-2">
                                             <img src={item.image} alt={item.name} height="45" width="65" />

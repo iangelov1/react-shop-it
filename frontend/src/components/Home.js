@@ -62,10 +62,6 @@ const Home = ({ match }) => {
         count = filteredProductsCount
     }
 
-    useEffect(() => {
-        console.log(category)
-    }, [category])
-
     return (
         <Fragment>
             {

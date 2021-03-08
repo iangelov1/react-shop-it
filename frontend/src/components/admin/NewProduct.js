@@ -178,10 +178,7 @@ const NewProduct = ({ history }) => {
                                      </label>
                                     </div>
 
-                                    {/* {avatarPreview?.map(img => (
-                                        console.log(img),
-                                        <img src={img.image} key={img.image} alt="Images Preview" className="mt-3 mr-2" width="55" height="52" />
-                                    ))} */}
+                                    <img src={avatarPreview} alt="Images Preview" className="mt-3 mr-2" width="55" height="52" />
 
                                 </div>
 
