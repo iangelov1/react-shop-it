@@ -16,12 +16,11 @@ const NewProduct = ({ history }) => {
     const [category, setCategory] = useState('');
     const [stock, setStock] = useState(0);
     const [seller, setSeller] = useState('');
-    // const [images, setImages] = useState([]);
-    // const [imagesPreview, setImagesPreview] = useState([])
 
-    const [avatar, setAvatar] = useState([])
-    const [avatarPreview, setAvatarPreview] = useState([])
-    const [imageName, setImageName] = useState([]);
+    const [avatar, setAvatar] = useState([]);
+    const [avatarPreview, setAvatarPreview] = useState([]);
+
+    const [imageName, setImageName] = useState();
 
     const categories = [
         'Electronics',
@@ -69,50 +68,26 @@ const NewProduct = ({ history }) => {
         formData.set('category', category);
         formData.set('stock', stock);
         formData.set('seller', seller);
-
-        avatar.forEach(image => {
-            formData.append('avatar', image)
-        })
-
-        imageName.forEach(image => {
-            formData.append('imageName', image)
-        })
+        formData.set('imageName', imageName)
+        formData.set('avatar', avatar);
 
         dispatch(newProduct(formData))
     }
 
     const onChange = e => {
 
-        const files = Array.from(e.target.files);
+        const reader = new FileReader();
 
-        files.forEach((file) => {
-            const reader = new FileReader();
-
-            setImageName(test => [...test, file.name])
-
-            reader.onload = () => {
-                if (reader.readyState === 2) {
-                    setAvatarPreview(oldArray => [...oldArray, reader.result]);
-                    setAvatar(oldArray => [...oldArray, reader.result]);
-                }
+        reader.onload = () => {
+            if (reader.readyState === 2) {
+                setAvatarPreview(reader.result)
+                setAvatar(reader.result)
             }
+        }
 
-            reader.readAsDataURL(file);
-        });
+        reader.readAsDataURL(e.target.files[0])
+        setImageName(e.target.files[0].name)
     }
-
-
-    useEffect(() => {
-        console.log('AVATAR_PREVIEW: ', avatarPreview)
-    }, [avatarPreview])
-
-    useEffect(() => {
-        console.log('AVATAR: ', avatar)
-    }, [avatar])
-
-    useEffect(() => {
-        console.log('IMAGE_NAME: ', imageName)
-    }, [imageName])
 
     return (
         <Fragment>
@@ -125,7 +100,7 @@ const NewProduct = ({ history }) => {
                 <div className="col-12 col-md-10">
                     <Fragment>
                         <div className="wrapper my-5">
-                            <form className="shadow-lg" onSubmit={submitHandler} encType='multipart/form-data'>
+                            <form className="shadow-lg" onSubmit={submitHandler}>
                                 <h1 className="mb-4">New Product</h1>
 
                                 <div className="form-group">
@@ -203,9 +178,10 @@ const NewProduct = ({ history }) => {
                                      </label>
                                     </div>
 
-                                    {avatarPreview?.map(img => (
-                                        <img src={img} key={img} alt="Images Preview" className="mt-3 mr-2" width="55" height="52" />
-                                    ))}
+                                    {/* {avatarPreview?.map(img => (
+                                        console.log(img),
+                                        <img src={img.image} key={img.image} alt="Images Preview" className="mt-3 mr-2" width="55" height="52" />
+                                    ))} */}
 
                                 </div>
 
